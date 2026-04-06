@@ -1,0 +1,48 @@
+table 'Parâmetro 2'
+	lineageTag: e02af775-def6-4ec3-9c94-442a551235a1
+
+	column Parâmetro
+		lineageTag: be162a49-34d9-4c27-bd33-5ab62a09d7ac
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parâmetro Pedido'
+
+		relatedColumnDetails
+			groupByColumn: 'Parâmetro Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâmetro Campos'
+		isHidden
+		lineageTag: 7f7ec195-5248-4e9c-b7a2-3db853a7ea53
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parâmetro Pedido'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâmetro Pedido'
+		isHidden
+		formatString: 0
+		lineageTag: 820f2804-806c-460c-98be-8fc849614e5d
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parâmetro 2' = calculated
+		mode: import
+		source =
+				{
+				    ("Cargo", NAMEOF('Fato_base_func'[Cargo]), 0),
+				    ("Escolaridade", NAMEOF('Fato_base_func'[Escolaridade]), 1)
+				}
+
+	annotation PBI_Id = 2b2e1e31edab44299cd338641b9e3f22
+

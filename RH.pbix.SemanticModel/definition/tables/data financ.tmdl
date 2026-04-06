@@ -1,0 +1,48 @@
+table 'data financ'
+	lineageTag: 438993e2-cd5b-4341-a421-e9821c1b5c89
+
+	column 'data financ'
+		lineageTag: 31e57029-d22e-4307-8942-c0b2699c255f
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'data financ Pedido'
+
+		relatedColumnDetails
+			groupByColumn: 'data financ Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'data financ Campos'
+		isHidden
+		lineageTag: 32704cc8-d063-40e6-a8f2-b637648a5a33
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'data financ Pedido'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'data financ Pedido'
+		isHidden
+		formatString: 0
+		lineageTag: 834e4ec0-caa3-4df0-93ee-ab38f51bccb6
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'data financ' = calculated
+		mode: import
+		source =
+				{
+				    ("Ano", NAMEOF('Ficha Financeira'[Ano]), 0),
+				    ("Mês", NAMEOF('Ficha Financeira'[Mês]), 1)
+				}
+
+	annotation PBI_Id = 7565e53e1a904c0b8fce69853a86b27f
+

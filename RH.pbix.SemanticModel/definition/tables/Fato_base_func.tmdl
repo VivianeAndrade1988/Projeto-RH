@@ -1,0 +1,302 @@
+table Fato_base_func
+	lineageTag: d1855a08-3145-4e24-8af1-5aedd38c8bf8
+
+	column 'Cód Funcionário'
+		dataType: int64
+		formatString: 0
+		lineageTag: a5785fa3-e807-4ceb-864d-65bf8768c0d0
+		summarizeBy: none
+		sourceColumn: Cód Funcionário
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cód Cargo'
+		dataType: string
+		lineageTag: dae2e059-4274-45bd-8992-d4e7c031f478
+		summarizeBy: none
+		sourceColumn: Cód Cargo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cargo
+		dataType: string
+		lineageTag: afd6b3a7-6bfc-4b96-adc2-bbc2426b95fe
+		summarizeBy: none
+		sourceColumn: Cargo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Cargo'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 34e4b631-42a3-4ef7-8f8b-625b876b4ca6
+		summarizeBy: none
+		sourceColumn: Data Cargo
+
+		variation Variation
+			isDefault
+			relationship: 3ad14de8-2a33-40e3-aa26-af3d053a7eb2
+			defaultHierarchy: LocalDateTable_8acf5a9c-57e9-4952-831e-aeab46a414a4.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Cód Escala'
+		dataType: string
+		lineageTag: 40afb406-1a01-475e-97f5-d3391f082e95
+		summarizeBy: none
+		sourceColumn: Cód Escala
+
+		annotation SummarizationSetBy = Automatic
+
+	column Escala
+		dataType: string
+		lineageTag: bc9db091-188f-4fda-b273-22c1385d8a45
+		summarizeBy: none
+		sourceColumn: Escala
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cód C.Custo'
+		dataType: string
+		lineageTag: e06c742e-1bad-4a31-93c3-9e5e953740a4
+		summarizeBy: none
+		sourceColumn: Cód C.Custo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Centro Custo'
+		dataType: string
+		lineageTag: a9dcbf2d-71ea-44ce-8e0e-f89006cec46b
+		summarizeBy: none
+		sourceColumn: Centro Custo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cód T. Contrato'
+		dataType: string
+		lineageTag: d864a883-1642-42e3-b848-d53b3363c0cb
+		summarizeBy: none
+		sourceColumn: Cód T. Contrato
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tipo Contrato'
+		dataType: string
+		lineageTag: a39a9fcf-8ae9-474b-be0b-60f693bd0037
+		summarizeBy: none
+		sourceColumn: Tipo Contrato
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cód Estado Civil'
+		dataType: string
+		lineageTag: ca2e5404-b461-417a-8b1b-a963c5be0aa8
+		summarizeBy: none
+		sourceColumn: Cód Estado Civil
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estado Civil'
+		dataType: string
+		lineageTag: 14f7e7b8-bd28-45df-95ea-4b6b7a17910e
+		summarizeBy: none
+		sourceColumn: Estado Civil
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cód Escolaridade'
+		dataType: string
+		lineageTag: 5d344298-f401-4ff4-a8ec-42ef043cfd92
+		summarizeBy: none
+		sourceColumn: Cód Escolaridade
+
+		annotation SummarizationSetBy = Automatic
+
+	column Escolaridade
+		dataType: string
+		lineageTag: 72861c20-d604-496b-9189-c510913628d1
+		summarizeBy: none
+		sourceColumn: Escolaridade
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Nascimento'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4406aa8d-9bc2-465e-9231-e03b6f310ea1
+		summarizeBy: none
+		sourceColumn: Data Nascimento
+
+		variation Variation
+			isDefault
+			relationship: 59d85218-3a51-4b15-86d4-d5cddd7751e5
+			defaultHierarchy: LocalDateTable_4caf472e-5801-478f-852f-3c5d461bbd71.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Cód Nacionalidade'
+		dataType: string
+		lineageTag: b8d96420-9fa9-46ea-a96b-1f3e46914e57
+		summarizeBy: none
+		sourceColumn: Cód Nacionalidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nacionalidade
+		dataType: string
+		lineageTag: 10afa629-33f0-4253-a2e6-d932c634e310
+		summarizeBy: none
+		sourceColumn: Nacionalidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cód Raça'
+		dataType: string
+		lineageTag: dec642e6-e9f8-4969-9f05-f02c38d2bdd5
+		summarizeBy: none
+		sourceColumn: Cód Raça
+
+		annotation SummarizationSetBy = Automatic
+
+	column Raça
+		dataType: string
+		lineageTag: 0bd3bf4f-bbe6-4bba-8d2a-f0027b4062ad
+		summarizeBy: none
+		sourceColumn: Raça
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Valor Salário'
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 9d996585-cac5-42a9-b52d-526d5a179d2e
+		summarizeBy: sum
+		sourceColumn: Valor Salário
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column 'Data Salário'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ac7bf7f8-28be-4f45-b08b-9ded6183ad59
+		summarizeBy: none
+		sourceColumn: Data Salário
+
+		variation Variation
+			isDefault
+			relationship: b4579f71-920f-4718-9501-295992193a6e
+			defaultHierarchy: LocalDateTable_895bc8ca-e614-4d1d-a1d5-ecfedd082271.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Cód Situação'
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a478281-e3cb-467e-9008-4bbf61c81091
+		summarizeBy: sum
+		sourceColumn: Cód Situação
+
+		annotation SummarizationSetBy = Automatic
+
+	column Situação
+		dataType: string
+		lineageTag: f07f45e5-1e5f-437b-b58c-9f6653be7c58
+		summarizeBy: none
+		sourceColumn: Situação
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Afastamento'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 00af4b8e-c3bf-4947-9ea9-8a4a922bf513
+		summarizeBy: none
+		sourceColumn: Data Afastamento
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Cód Causa Afastamento'
+		dataType: string
+		lineageTag: d9af01c1-e4dd-47b4-96d8-ba6c4cc6145d
+		summarizeBy: none
+		sourceColumn: Cód Causa Afastamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Causa Afastamento'
+		dataType: string
+		lineageTag: 41cdaee5-649e-41df-8f93-5d045cdd91ce
+		summarizeBy: none
+		sourceColumn: Causa Afastamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Funcionário
+		dataType: string
+		lineageTag: 9e8287ce-5281-4d5f-b8af-4f4b4ec36fa4
+		summarizeBy: none
+		sourceColumn: Funcionário
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sexo
+		dataType: string
+		lineageTag: a115dfe9-7331-4105-b90c-64d46d898e68
+		summarizeBy: none
+		sourceColumn: Sexo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Admissão'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a107eb41-2943-4b3b-94f4-9dc2b629e88a
+		summarizeBy: none
+		sourceColumn: Data Admissão
+
+		variation Variation
+			isDefault
+			relationship: bc48dc35-e247-4743-8a00-37459930068f
+			defaultHierarchy: LocalDateTable_7d5c4715-c26d-4d72-a9d6-8bebb66631d5.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition Fato_base_func = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\vivid\OneDrive\Área de Trabalho\ANÁLISE DE DADOS\POWER BI\BASE DE DADOS\1. RH\xperium\Desafio\BaseDados\Contratos.xlsx"), null, true),
+				    Planilha1_Sheet = Fonte{[Item="Planilha1",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Planilha1_Sheet, [PromoteAllScalars=true]),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Cabeçalhos Promovidos","00/00/0000",null,Replacer.ReplaceValue,{"Data Afastamento"}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Valor Substituído1","00/00/0000",null,Replacer.ReplaceValue,{"Data Afastamento"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Valor Substituído",{{"Data Afastamento", type date}}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Tipo Alterado",{{"Data Admissão", type date}, {"Data Cargo", type date}}),
+				    #"Valor Substituído2" = Table.ReplaceValue(#"Tipo Alterado1",null,7,Replacer.ReplaceValue,{"Cód Escolaridade"}),
+				    #"Linhas Filtradas1" = Table.SelectRows(#"Valor Substituído2", each ([Escolaridade] <> "5º Ano Completo Ensino Fund.") and ([Data Nascimento] <> #date(2982, 4, 21) and [Data Nascimento] <> #date(9979, 7, 13) and [Data Nascimento] <> #date(9982, 2, 5) and [Data Nascimento] <> "99/99/9999")),
+				    #"Valor Substituído3" = Table.ReplaceValue(#"Linhas Filtradas1","00/00/0000",null,Replacer.ReplaceValue,{"Data Nascimento"}),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Valor Substituído3",{{"Data Nascimento", type date}}),
+				    #"Valor Substituído4" = Table.ReplaceValue(#"Tipo Alterado2",#date(981, 4, 25),#date(1981, 4, 25),Replacer.ReplaceValue,{"Data Nascimento"}),
+				    #"Erros Removidos" = Table.RemoveRowsWithErrors(#"Valor Substituído4", {"Data Nascimento"}),
+				    #"Tipo Alterado3" = Table.TransformColumnTypes(#"Erros Removidos",{{"Data Salário", type date}, {"Cód Funcionário", Int64.Type}, {"Valor Salário", Currency.Type}, {"Cód Situação", Int64.Type}}),
+				    #"Valor Substituído5" = Table.ReplaceValue(#"Tipo Alterado3","M","Masculino",Replacer.ReplaceText,{"Sexo"}),
+				    #"Valor Substituído6" = Table.ReplaceValue(#"Valor Substituído5","F","Feminino",Replacer.ReplaceText,{"Sexo"})
+				in
+				    #"Valor Substituído6"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,48 @@
+table 'Abs e extra'
+	lineageTag: b8da67ce-3bd9-46bd-a271-e54c8fdb63f9
+
+	column 'Abs e extra'
+		lineageTag: 7ca99e02-07eb-499e-b96a-9126469b1770
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Abs e extra Pedido'
+
+		relatedColumnDetails
+			groupByColumn: 'Abs e extra Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Abs e extra Campos'
+		isHidden
+		lineageTag: daad7d6d-43df-4f89-9817-5efa905752f2
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Abs e extra Pedido'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Abs e extra Pedido'
+		isHidden
+		formatString: 0
+		lineageTag: c201633f-aa90-4f34-a2ad-4e8bd1c5b961
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Abs e extra' = calculated
+		mode: import
+		source =
+				{
+				    ("Absenteísmo", NAMEOF('Medidas'[Absenteísmo]), 0),
+				    ("Horas Extras", NAMEOF('Medidas'[Horas Extras]), 1)
+				}
+
+	annotation PBI_Id = 051d746f8a424256a95f7cfab8334be2
+

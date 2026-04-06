@@ -1,0 +1,44 @@
+expression Parâmetro1 = #"Arquivo de Amostra" meta [IsParameterQuery=true, BinaryIdentifier=#"Arquivo de Amostra", Type="Binary", IsParameterQueryRequired=true]
+	lineageTag: f5a6035c-8b13-4c2a-a366-a7291ae0bba6
+	queryGroup: 'Transformar Arquivo de Ficha Financeira\Consultas Auxiliares'
+
+	annotation PBI_ResultType = Binary
+
+expression 'Arquivo de Amostra' =
+		let
+		    Fonte = Folder.Files("C:\Users\vivid\OneDrive\Área de Trabalho\ANÁLISE DE DADOS\POWER BI\BASE DE DADOS\1. RH\xperium\Desafio\BaseDados\Ficha Financeira"),
+		    #"Outras Colunas Removidas" = Table.SelectColumns(Fonte,{"Content"}),
+		    Navegação1 = #"Outras Colunas Removidas"{0}[Content]
+		in
+		    Navegação1
+	lineageTag: cc96a72b-2a67-4ae5-986c-b05db12fdcc5
+	queryGroup: 'Transformar Arquivo de Ficha Financeira\Consultas Auxiliares'
+
+	annotation PBI_ResultType = Binary
+
+expression 'Transformar o Arquivo de Exemplo' =
+		let
+		    Fonte = Csv.Document(Parâmetro1,[Delimiter=";", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])
+		in
+		    #"Cabeçalhos Promovidos"
+	lineageTag: a1cf2464-b349-4ca9-9962-18df3fe5e2bc
+	queryGroup: 'Transformar Arquivo de Ficha Financeira'
+
+	annotation PBI_ResultType = Table
+
+expression 'Transformar Arquivo' =
+		let
+		    Fonte = (Parâmetro1 as binary) => let
+		    Fonte = Csv.Document(Parâmetro1,[Delimiter=";", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])
+		in
+		    #"Cabeçalhos Promovidos"
+		in
+		    Fonte
+	mAttributes: [ FunctionQueryBinding = "{""exemplarFormulaName"":""Transformar o Arquivo de Exemplo""}" ]
+	lineageTag: 4741b9c9-ba4f-42ce-a825-fab00e9d45f5
+	queryGroup: 'Transformar Arquivo de Ficha Financeira\Consultas Auxiliares'
+
+	annotation PBI_ResultType = Function
+

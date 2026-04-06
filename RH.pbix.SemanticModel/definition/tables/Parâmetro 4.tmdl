@@ -1,0 +1,48 @@
+table 'Parâmetro 4'
+	lineageTag: 567ebde7-af1d-4151-a553-653b83039c60
+
+	column Parâmetro
+		lineageTag: ac37dc8b-38a9-4c02-ba76-4a8f87929929
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parâmetro Pedido'
+
+		relatedColumnDetails
+			groupByColumn: 'Parâmetro Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâmetro Campos'
+		isHidden
+		lineageTag: 445fd02c-2b86-4bfa-ab53-3335003760e5
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parâmetro Pedido'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâmetro Pedido'
+		isHidden
+		formatString: 0
+		lineageTag: 1153d341-a7c3-48e4-8313-e881ae192bff
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parâmetro 4' = calculated
+		mode: import
+		source =
+				{
+				    ("% Crescimento YoY", NAMEOF('Medidas'[% Crescimento YoY]), 0),
+				    ("% Demissões YoY", NAMEOF('Medidas'[% Demissões YoY]), 1)
+				}
+
+	annotation PBI_Id = dd44f022f6e245b8b21bc0fc3c154762
+

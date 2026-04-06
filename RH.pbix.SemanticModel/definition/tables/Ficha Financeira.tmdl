@@ -1,0 +1,94 @@
+table 'Ficha Financeira'
+	lineageTag: a2cebf8e-970d-4d9d-b006-9d5770831e40
+
+	column Matricula
+		dataType: int64
+		formatString: 0
+		lineageTag: 96e81870-c442-4632-99fd-49ca0a874709
+		summarizeBy: none
+		sourceColumn: Matricula
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cargo
+		dataType: string
+		lineageTag: aaaa9dd7-aacb-4cb6-8a73-943ba0f7b5e2
+		summarizeBy: none
+		sourceColumn: Cargo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mês
+		dataType: string
+		lineageTag: e3ee92af-9f84-4951-a16d-789243c8c569
+		summarizeBy: none
+		sourceColumn: Mês
+		sortByColumn: 'Mês num'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Evento
+		dataType: int64
+		formatString: 0
+		lineageTag: 4162f663-e57a-4a03-879c-8de5b9b14e2a
+		summarizeBy: none
+		sourceColumn: Evento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Valor
+		dataType: double
+		lineageTag: 453d593a-4de3-44b2-bb52-5154fef24f94
+		summarizeBy: sum
+		sourceColumn: Valor
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Ano
+		dataType: int64
+		formatString: 0
+		lineageTag: 84f7ccfb-0c20-4772-978c-af6c4b30b687
+		summarizeBy: sum
+		sourceColumn: Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mês num'
+		dataType: int64
+		formatString: 0
+		lineageTag: c273024b-c881-475a-9715-be921db2f89b
+		summarizeBy: sum
+		sourceColumn: Mês num
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Ficha Financeira' = m
+		mode: import
+		source =
+				let
+				    Fonte = Folder.Files("C:\Users\vivid\OneDrive\Área de Trabalho\ANÁLISE DE DADOS\POWER BI\BASE DE DADOS\1. RH\xperium\Desafio\BaseDados\Ficha Financeira"),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(Fonte,{"Content"}),
+				    #"Arquivos Ocultos Filtrados1" = Table.SelectRows(#"Outras Colunas Removidas", each [Attributes]?[Hidden]? <> true),
+				    #"Invocar Função Personalizada1" = Table.AddColumn(#"Arquivos Ocultos Filtrados1", "Transformar Arquivo", each #"Transformar Arquivo"([Content])),
+				    #"Outras Colunas Removidas1" = Table.SelectColumns(#"Invocar Função Personalizada1", {"Transformar Arquivo"}),
+				    #"Coluna de Tabela Expandida1" = Table.ExpandTableColumn(#"Outras Colunas Removidas1", "Transformar Arquivo", Table.ColumnNames(#"Transformar Arquivo"(#"Arquivo de Amostra"))),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Coluna de Tabela Expandida1",{{"Matricula", Int64.Type}, {"Cargo", type text}, {"Mês Pag.", type date}, {"Evento", Int64.Type}, {"Valor", type number}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"", "_1"}),
+				    #"Mês Inserido" = Table.AddColumn(#"Colunas Removidas", "Mês", each Date.Month([#"Mês Pag."]), Int64.Type),
+				    #"Colunas Renomeadas1" = Table.RenameColumns(#"Mês Inserido",{{"Mês", "Mês num"}}),
+				    #"Ano Inserido" = Table.AddColumn(#"Colunas Renomeadas1", "Ano", each Date.Year([#"Mês Pag."]), Int64.Type),
+				    #"Nome do Mês Extraído" = Table.TransformColumns(#"Ano Inserido", {{"Mês Pag.", each Date.MonthName(_), type text}}),
+				    #"Primeiros caracteres extraídos" = Table.TransformColumns(#"Nome do Mês Extraído", {{"Mês Pag.", each Text.Start(_, 3), type text}}),
+				    #"Texto em Maiúscula" = Table.TransformColumns(#"Primeiros caracteres extraídos",{{"Mês Pag.", Text.Upper, type text}}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Texto em Maiúscula",{{"Mês Pag.", "Mês"}})
+				in
+				    #"Colunas Renomeadas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,48 @@
+table 'Parâmetro 3'
+	lineageTag: 89852290-a737-4f98-ac40-8ffc8146c2c9
+
+	column Parâmetro
+		lineageTag: f2681b7c-0a5b-47c4-be88-ea4543d47d69
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parâmetro Pedido'
+
+		relatedColumnDetails
+			groupByColumn: 'Parâmetro Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâmetro Campos'
+		isHidden
+		lineageTag: 63bc0607-e46b-4b42-a697-5d2e04a887f7
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parâmetro Pedido'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâmetro Pedido'
+		isHidden
+		formatString: 0
+		lineageTag: 683912d9-6ac2-402e-b3fb-88693dee5875
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parâmetro 3' = calculated
+		mode: import
+		source =
+				{
+				    ("Contratações", NAMEOF('Medidas'[Contratações]), 0),
+				    ("Demissões", NAMEOF('Medidas'[Demissões]), 1)
+				}
+
+	annotation PBI_Id = 222761372c094e1ca13550b26534890e
+

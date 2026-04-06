@@ -1,0 +1,41 @@
+table auxMedidaDinamicaPG1
+	lineageTag: 645eb142-a60a-4e98-b4fe-ed4dea8fa7de
+
+	column 'Medida Dinamica'
+		lineageTag: d691bfb3-b9c3-4ef2-afe3-d18b597e80b5
+		summarizeBy: none
+		sourceColumn: [Value1]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Medida Dinamica campos'
+		isHidden
+		lineageTag: 1ff4b23e-da9c-4623-b8da-4e6833b4d915
+		summarizeBy: none
+		sourceColumn: [Value2]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Medida Dinamica pedido'
+		isHidden
+		formatString: 0
+		lineageTag: b8398dd4-7da7-4e96-bb9a-f5299858cf1c
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition auxMedidaDinamicaPG1 = calculated
+		mode: import
+		source =
+				
+				{
+				    ("Contratações", NAMEOF('Medidas'[Contratações]), 0),
+				    ("Demissões", NAMEOF('Medidas'[Demissões]), 1),
+				    ("Headcount", NAMEOF('Medidas'[Headcount]), 2),
+				    ("Massa Salarial", NAMEOF('Medidas'[Massa Salarial]), 3),
+				    ("Má Contratações", NAMEOF('Medidas'[Má Contratações]), 4)
+				}
+
+	annotation PBI_Id = 98977232b5f9427a97ca76f1a8ada7b0
+

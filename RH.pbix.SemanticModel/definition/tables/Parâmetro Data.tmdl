@@ -1,0 +1,48 @@
+table 'Parâmetro Data'
+	lineageTag: 80165e14-1d07-4c45-afdc-aa6a25a1b889
+
+	column 'Parâmetro Data'
+		lineageTag: cc3ac2ec-3b71-423f-a24c-2b6937c3bfe7
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parâmetro Pedido'
+
+		relatedColumnDetails
+			groupByColumn: 'Parâmetro Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâmetro Campos'
+		isHidden
+		lineageTag: 0c19578c-7a71-48eb-aca6-cbe67edcf7c2
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parâmetro Pedido'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâmetro Pedido'
+		isHidden
+		formatString: 0
+		lineageTag: 4743ce0a-3689-49f8-a817-1daccc9cb375
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parâmetro Data' = calculated
+		mode: import
+		source =
+				{
+				    ("Ano", NAMEOF('dCalendario'[Ano]), 0),
+				    ("Mês", NAMEOF('dCalendario'[Mês]), 1)
+				}
+
+	annotation PBI_Id = d40d1ca9463c4a77ad8c99138b273327
+

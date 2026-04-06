@@ -1,0 +1,36 @@
+table auxMedidaDinamicaPG2
+	lineageTag: fcad1ac4-2e85-4ad7-86bd-fb9994b5e50d
+
+	column Parametro
+		lineageTag: 49fbedde-6b72-4729-82f9-cb0ab32e07bb
+		summarizeBy: none
+		sourceColumn: [Value1]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parametro campos'
+		lineageTag: a8878676-3a4f-4726-a10c-de00ca3f322d
+		summarizeBy: none
+		sourceColumn: [Value2]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parametro pedido'
+		formatString: 0
+		lineageTag: 9b991145-9d44-4aec-aad3-4737f230e970
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition auxMedidaDinamicaPG2 = calculated
+		mode: import
+		source =
+				
+				{
+				    ("Absenteísmo", NAMEOF('Medidas'[% Absenteismo]), 0),
+				    ("Horas Extras", NAMEOF('Medidas'[% Horas Extras]), 1)
+				}
+
+	annotation PBI_Id = 0264ebc522f644ec819b2ab36e906006
+

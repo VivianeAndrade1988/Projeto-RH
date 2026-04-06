@@ -1,0 +1,48 @@
+table 'Parâmetro Data abs'
+	lineageTag: b3c385d4-658f-4646-b0ee-df62aac61d37
+
+	column 'Parâmetro Data abs'
+		lineageTag: b181e316-dae5-4608-8842-936660c9d32d
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parâmetro Data abs Pedido'
+
+		relatedColumnDetails
+			groupByColumn: 'Parâmetro Data abs Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâmetro Data abs Campos'
+		isHidden
+		lineageTag: 708a55b7-8758-4004-9bad-4c33079aee26
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parâmetro Data abs Pedido'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâmetro Data abs Pedido'
+		isHidden
+		formatString: 0
+		lineageTag: dc6d2f2b-b0dd-4a26-9660-49fb9d640a97
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parâmetro Data abs' = calculated
+		mode: import
+		source =
+				{
+				    ("Ano", NAMEOF('Ficha Financeira'[Ano]), 0),
+				    ("Mês", NAMEOF('Ficha Financeira'[Mês]), 1)
+				}
+
+	annotation PBI_Id = e04dc0b18374490da2390e83f5236df9
+

@@ -1,0 +1,38 @@
+table auxEixoDinamicoPG1
+	lineageTag: fb629e61-e58d-4df1-95d5-527f35d70494
+
+	column Eixo_DInamico
+		lineageTag: 43aa7e9d-a4f5-48ec-bee7-d8ed06daa7a5
+		summarizeBy: none
+		sourceColumn: [Value1]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Eixo Dinamico Campos'
+		isHidden
+		lineageTag: 0236f28d-aed2-460c-abde-cfe7b52b2eaa
+		summarizeBy: none
+		sourceColumn: [Value2]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Eixo Dinamico pedidos'
+		isHidden
+		formatString: 0
+		lineageTag: ddc1642b-919a-443e-82ee-5817070607b7
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition auxEixoDinamicoPG1 = calculated
+		mode: import
+		source =
+				
+				{
+				    ("Cargo", NAMEOF(Fato_base_func[Cargo]), 0),
+				    ("Escolaridade", NAMEOF(Fato_base_func[Escolaridade]),1)
+				}
+
+	annotation PBI_Id = ed76b17dba7a4474b08c63f00494e702
+

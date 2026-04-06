@@ -1,0 +1,122 @@
+table Dim_Func
+	lineageTag: 047bd2fe-3be9-4dc3-8f7a-5eefc4769a75
+
+	column 'Total de Anos'
+		dataType: double
+		lineageTag: 1d047a5a-e60d-4f0e-beed-369f71cc4575
+		summarizeBy: sum
+		sourceColumn: Total de Anos
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Faixa Etária' =
+			
+			SWITCH(
+			    TRUE(),
+			    Dim_Func[Total de Anos] <= 24, "0 a 24",
+			    Dim_Func[Total de Anos] <= 34, "25 a 34",
+			    Dim_Func[Total de Anos] <= 44, "35 a 44",
+			    Dim_Func[Total de Anos] <= 54, "45 a 54",
+			    "55+"
+			)
+		lineageTag: 62756ad8-8392-4a06-a234-a9311777d1d8
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cód Funcionário'
+		dataType: int64
+		formatString: 0
+		lineageTag: 10a70165-9bfc-4e68-84d7-a48dde3012b3
+		summarizeBy: none
+		sourceColumn: Cód Funcionário
+
+		annotation SummarizationSetBy = Automatic
+
+	column Funcionário
+		dataType: string
+		lineageTag: 0fbf2cc3-b1ca-48bc-a450-0f1533573fa1
+		summarizeBy: none
+		sourceColumn: Funcionário
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sexo
+		dataType: string
+		lineageTag: cb052377-1859-414a-a599-7e0be63f52c9
+		summarizeBy: none
+		sourceColumn: Sexo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Admissão'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 919fd59d-9b6e-41f2-9f53-4178874f009e
+		summarizeBy: none
+		sourceColumn: Data Admissão
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Data Nascimento'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 029ffeeb-97e7-4842-9f61-5e38e63eee66
+		summarizeBy: none
+		sourceColumn: Data Nascimento
+
+		variation Variation
+			isDefault
+			relationship: a307c0dc-3e3e-435f-9add-ce4f564c886c
+			defaultHierarchy: LocalDateTable_f98c7213-26ca-4753-b0ba-06571459185c.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Idade
+		dataType: double
+		lineageTag: d5bb6d2e-6ce7-4fc1-8f2d-a751b75a96da
+		summarizeBy: sum
+		sourceColumn: Idade
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Dim_Func = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\vivid\OneDrive\Área de Trabalho\ANÁLISE DE DADOS\POWER BI\BASE DE DADOS\1. RH\xperium\Desafio\BaseDados\Contratos.xlsx"), null, true),
+				    Planilha1_Sheet = Fonte{[Item="Planilha1",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Planilha1_Sheet, [PromoteAllScalars=true]),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Cabeçalhos Promovidos","00/00/0000",null,Replacer.ReplaceValue,{"Data Afastamento"}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Valor Substituído1","00/00/0000",null,Replacer.ReplaceValue,{"Data Afastamento"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Valor Substituído",{{"Data Afastamento", type date}}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Tipo Alterado",{{"Data Admissão", type date}, {"Data Cargo", type date}}),
+				    #"Valor Substituído2" = Table.ReplaceValue(#"Tipo Alterado1",null,7,Replacer.ReplaceValue,{"Cód Escolaridade"}),
+				    #"Linhas Filtradas1" = Table.SelectRows(#"Valor Substituído2", each ([Escolaridade] <> "5º Ano Completo Ensino Fund.") and ([Data Nascimento] <> #date(2982, 4, 21) and [Data Nascimento] <> #date(9979, 7, 13) and [Data Nascimento] <> #date(9982, 2, 5) and [Data Nascimento] <> "99/99/9999")),
+				    #"Valor Substituído3" = Table.ReplaceValue(#"Linhas Filtradas1","00/00/0000",null,Replacer.ReplaceValue,{"Data Nascimento"}),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Valor Substituído3",{{"Data Nascimento", type date}}),
+				    #"Valor Substituído4" = Table.ReplaceValue(#"Tipo Alterado2",#date(981, 4, 25),#date(1981, 4, 25),Replacer.ReplaceValue,{"Data Nascimento"}),
+				    #"Erros Removidos" = Table.RemoveRowsWithErrors(#"Valor Substituído4", {"Data Nascimento"}),
+				    #"Tipo Alterado3" = Table.TransformColumnTypes(#"Erros Removidos",{{"Data Salário", type date}, {"Cód Funcionário", Int64.Type}}),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Tipo Alterado3",{"Cód Funcionário", "Funcionário", "Sexo", "Data Admissão", "Data Nascimento"}),
+				    #"Valor Substituído5" = Table.ReplaceValue(#"Outras Colunas Removidas",null,#date(1988, 10, 15),Replacer.ReplaceValue,{"Data Nascimento"}),
+				    #"Idade Inserida" = Table.AddColumn(#"Valor Substituído5", "Idade", each Date.From(DateTime.LocalNow()) - [Data Nascimento], type duration),
+				    #"Duplicatas Removidas" = Table.Distinct(#"Idade Inserida", {"Cód Funcionário"}),
+				    #"Total de Anos Inseridos" = Table.AddColumn(#"Duplicatas Removidas", "Total de Anos", each Duration.TotalDays([Idade]) / 365, type number)
+				in
+				    #"Total de Anos Inseridos"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

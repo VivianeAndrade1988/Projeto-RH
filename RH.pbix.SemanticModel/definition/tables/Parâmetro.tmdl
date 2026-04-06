@@ -1,0 +1,52 @@
+table Parâmetro
+	lineageTag: b2b0a64f-2519-4f63-85f4-f864717c8285
+
+	column Parâmetro
+		lineageTag: 9ee0a576-b6fb-4783-bb12-679ba97d045e
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parâmetro Pedido'
+
+		relatedColumnDetails
+			groupByColumn: 'Parâmetro Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâmetro Campos'
+		isHidden
+		lineageTag: 0a67a2dd-d838-4f2f-b1b4-745320eb9a49
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parâmetro Pedido'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâmetro Pedido'
+		isHidden
+		formatString: 0
+		lineageTag: 0a86a48a-fd74-4ab7-abc8-a19dd8276e79
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Parâmetro = calculated
+		mode: import
+		source =
+				{
+				    ("Contratações", NAMEOF('Medidas'[Contratações]), 0),
+				    ("Demissões", NAMEOF('Medidas'[Demissões]), 1),
+				    ("Headcount", NAMEOF('Medidas'[Headcount]), 2),
+				    ("Absenteísmo", NAMEOF('Medidas'[Absenteísmo]), 3),
+				    ("Má Contratações", NAMEOF('Medidas'[Má Contratações]), 4),
+				    ("Massa Salarial", NAMEOF('Medidas'[Massa Salarial]), 5)
+				}
+
+	annotation PBI_Id = 779177dbba9a4aad85b8adfa7aa0b5ff
+

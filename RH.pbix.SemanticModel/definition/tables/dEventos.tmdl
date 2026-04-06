@@ -1,0 +1,49 @@
+table dEventos
+	lineageTag: 7900e249-b9e6-4034-9235-a43a206e4385
+
+	column Categoria
+		dataType: string
+		lineageTag: 652a38d5-a520-43ac-9973-0913fe55f3b1
+		summarizeBy: none
+		sourceColumn: Categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column Evento
+		dataType: int64
+		formatString: 0
+		lineageTag: 5d882ffa-9306-4fab-8cee-12970d20a474
+		summarizeBy: none
+		sourceColumn: Evento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Descrição
+		dataType: string
+		lineageTag: 12dc7766-1cad-4523-aa26-d8dcde2e28bf
+		summarizeBy: none
+		sourceColumn: Descrição
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tipo
+		dataType: string
+		lineageTag: 5d11dd9b-ac48-4d9f-a3b6-b10053b54222
+		summarizeBy: none
+		sourceColumn: Tipo
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dEventos = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\vivid\OneDrive\Área de Trabalho\ANÁLISE DE DADOS\POWER BI\BASE DE DADOS\1. RH\xperium\Desafio\BaseDados\dEventos.xlsx"), null, true),
+				    Planilha1_Sheet = Fonte{[Item="Planilha1",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Planilha1_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Categoria", type text}, {"Evento", Int64.Type}, {"Descrição", type text}, {"Tipo", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

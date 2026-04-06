@@ -1,0 +1,194 @@
+table Medidas
+	lineageTag: f3d22c36-f0cb-433c-8fc8-571f9afc688b
+
+	measure Contratações = COUNTROWS(Fato_base_func)
+		formatString: 0
+		lineageTag: 61b01e03-c6ed-4638-9597-e5e940ccd8cc
+
+	measure Demissões =
+			
+			CALCULATE(
+			    COUNTROWS(Fato_base_func),
+			    Fato_base_func[Situação] = "Demitido",
+			    USERELATIONSHIP(dCalendario[Date], Fato_base_func[Data Afastamento])
+			)
+		formatString: 0
+		lineageTag: 7f82d818-4b3c-4c29-a06e-3cfaa6a7219e
+
+	measure Headcount =
+			
+			VAR vDataFinalContexto = MAX(dCalendario[Date])
+			RETURN
+			CALCULATE(
+			    COUNTROWS(Fato_base_func),
+			    Dim_Func[Data Admissão] <= vDataFinalContexto,
+			    Fato_base_func[Data Afastamento] > vDataFinalContexto || Fato_base_func[Situação] <> "Demitido",
+			    ALL(dCalendario)
+			)
+		formatString: 0
+		lineageTag: a5c880f5-a43a-4620-ae14-8fb2bc30a32a
+
+	measure 'Horas Extras' =
+			
+			CALCULATE(
+			    SUM('Ficha Financeira'[Valor]),
+			    dEventos[Categoria] = "Extras"
+			)
+		formatString: 0
+		lineageTag: 4b896a16-5e58-4adf-b372-69e9a39fcada
+
+	measure 'Horas Normais' =
+			
+			CALCULATE(
+			    SUM('Ficha Financeira'[Valor]),
+			    dEventos[Categoria] = "Normais"
+			)+0
+		lineageTag: 3c60c694-091b-4303-8413-7ad7fff9ca60
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Má Contratações' =
+			
+			CALCULATE(
+			    [Contratações],
+			    FILTER(
+			        Fato_base_func,
+			        DATEDIFF(Fato_base_func[Data Admissão], Fato_base_func[Data Afastamento], DAY) < 60 &&
+			        Fato_base_func[Situação] = "Demitido"
+			    )
+			)
+		formatString: 0
+		lineageTag: a69f93cf-e101-45be-9303-b40a27c9f727
+
+	measure 'Massa Salarial' =
+			//Somente para ativos!!!
+			VAR vDataFinalContexto= MAX(dCalendario[Date])
+			RETURN
+			CALCULATE(
+			    SUM(Fato_base_func[Valor Salário]),
+			    FILTER(
+			        Fato_base_func,
+			        Fato_base_func[Data Admissão]<= vDataFinalContexto &&
+			        Fato_base_func[Data Afastamento] > vDataFinalContexto || Fato_base_func[Cód Situação] <> 7)
+			    )
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 9b91a172-6635-4516-bac5-cfb39d938620
+
+	measure Absenteísmo =
+			
+			CALCULATE(
+			    SUM('Ficha Financeira'[Valor]),
+			    KEEPFILTERS(dEventos[Categoria] IN {"Faltas", "Atrasos", "Atestados"}
+			))
+		lineageTag: 8ef1466b-d5a1-4bc7-b135-164492b438a9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Absenteismo' = DIVIDE([Absenteísmo],[Horas Normais],BLANK())
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 39b4f8dc-3548-401b-8199-8cda82ef38fc
+
+	measure '% Horas extras' = DIVIDE([Horas Extras],[Horas Normais])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 833b1f61-cb29-4172-bb88-57af0b01dcf0
+
+	measure '% Má contratação' = DIVIDE(Medidas[Má Contratações],[Contratações])
+		formatString: 0%;-0%;0%
+		lineageTag: 34b96962-f3c5-42d7-a44d-56728dcd18d4
+
+	measure '% Turnover' = ```
+			
+			VAR vHCAnterior = 
+			CALCULATE(
+			    [Headcount],
+			    PREVIOUSDAY(dCalendario[Date])
+			)
+			VAR vHCNonBlank = COALESCE(vHCAnterior, [Headcount])
+			RETURN
+			DIVIDE(
+			    [Demissões],
+			    vHCAnterior
+			)
+			```
+		formatString: 0%;-0%;0%
+		lineageTag: 77c63479-aae6-431b-8ba7-2bca06d7a1ad
+
+	measure '% Turnover Ano Max' =
+			
+			VAR vAnoMax = MAX(dCalendario[Ano])
+			RETURN
+			CALCULATE(
+			    [% Turnover],
+			    dCalendario[Ano] = vAnoMax
+			)
+		formatString: 0%;-0%;0%
+		lineageTag: d09e1818-796f-4503-977d-192401b54e79
+
+	measure 'Headcount v2' =
+			
+			CALCULATE(
+			    [Contratações] - [Demissões],
+			    FILTER(
+			        ALL(dCalendario),
+			        dCalendario[Date] <= MAX(dCalendario[Date])
+			    )
+			)
+		formatString: 0
+		lineageTag: 721c64aa-1b19-4d44-a1b3-b2de73e7d869
+
+	measure 'Contratações ano anterior' = ```
+			CALCULATE(
+			    [Contratações],
+			    DATEADD(dCalendario[Date],-1,YEAR)
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 26366aa7-bd85-4128-b97e-665fa8796691
+
+	measure '% Crescimento YoY' = DIVIDE([Contratações]-[Contratações ano anterior],[Contratações ano anterior])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 2845f238-c073-4d84-acdd-cb23dd0321da
+
+	measure 'Demissões ano anterior' = ```
+			CALCULATE(
+			    [Demissões],
+			    DATEADD(dCalendario[Date],-1,YEAR)
+			)
+			
+			```
+		formatString: 0
+		lineageTag: a7eab077-fe0c-40c1-9053-ba89f68e16d7
+
+	measure '% Demissões YoY' = DIVIDE([Demissões]-[Demissões ano anterior],[Demissões ano anterior])
+		lineageTag: 9051b0e2-eb43-4b77-896a-5a4351e5e97e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Título eixo Selecionada' =
+			
+			SELECTEDVALUE('Parâmetro'[Parâmetro Campos])
+		lineageTag: 760182c7-1c0a-46a6-94a9-bf7e57573cca
+
+	column 'Coluna 1'
+		dataType: string
+		isHidden
+		lineageTag: e5ca8336-efc6-48f5-9255-93354bf4a542
+		summarizeBy: none
+		sourceColumn: Coluna 1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Coluna 1", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

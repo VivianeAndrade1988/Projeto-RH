@@ -1,0 +1,49 @@
+table 'Parâm Pag Inicial'
+	lineageTag: a8fb0c96-96cc-40c3-a0ed-b1a702387c7f
+
+	column 'Parâm Pag Inicial'
+		lineageTag: e6185475-31a2-4839-bf92-4f51cc891a7e
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parâm Pag Inicial Pedido'
+
+		relatedColumnDetails
+			groupByColumn: 'Parâm Pag Inicial Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâm Pag Inicial Campos'
+		isHidden
+		lineageTag: d416b05a-48d7-4faf-a844-b4a1981aea95
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parâm Pag Inicial Pedido'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâm Pag Inicial Pedido'
+		isHidden
+		formatString: 0
+		lineageTag: c5c03ca2-27d0-48c8-bb8c-3f4ff1264610
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parâm Pag Inicial' = calculated
+		mode: import
+		source =
+				{
+				    ("Demissões", NAMEOF('Medidas'[Demissões]), 0),
+				    ("Headcount", NAMEOF('Medidas'[Headcount]), 1),
+				    ("Má Contratações", NAMEOF('Medidas'[Má Contratações]), 2)
+				}
+
+	annotation PBI_Id = ab71769f8ecc48c49b824cddb0f73ebb
+

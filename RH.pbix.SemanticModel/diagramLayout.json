@@ -1,0 +1,266 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 4427.2001953125,
+        "y": 62.400001525878906
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 750,
+            "y": 0
+          },
+          "nodeIndex": "Fato_base_func",
+          "nodeLineageTag": "d1855a08-3145-4e24-8af1-5aedd38c8bf8",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 15,
+          "expandedHeight": 300
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 62
+          },
+          "nodeIndex": "Dim_Func",
+          "nodeLineageTag": "047bd2fe-3be9-4dc3-8f7a-5eefc4769a75",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 7,
+            "y": 354
+          },
+          "nodeIndex": "Ficha Financeira",
+          "nodeLineageTag": "a2cebf8e-970d-4d9d-b006-9d5770831e40",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 14
+        },
+        {
+          "location": {
+            "x": 327,
+            "y": 311
+          },
+          "nodeIndex": "dCalendario",
+          "nodeLineageTag": "588cd7e7-5f46-4fd4-b226-6e09f7c71339",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 13
+        },
+        {
+          "location": {
+            "x": 1420,
+            "y": 98
+          },
+          "nodeIndex": "Medidas",
+          "nodeLineageTag": "f3d22c36-f0cb-433c-8fc8-571f9afc688b",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 1704,
+            "y": 50
+          },
+          "nodeIndex": "auxEixoDinamicoPG1",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 625.20001220703125,
+            "y": 392.5
+          },
+          "nodeIndex": "dEventos",
+          "nodeLineageTag": "7900e249-b9e6-4034-9235-a43a206e4385",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1988,
+            "y": 155.5
+          },
+          "nodeIndex": "auxMedidaDinamicaPG1",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 2272,
+            "y": 155.5
+          },
+          "nodeIndex": "auxMedidaDinamicaPG2",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 2556,
+            "y": 179.5
+          },
+          "nodeIndex": "Parâmetro",
+          "nodeLineageTag": "b2b0a64f-2519-4f63-85f4-f864717c8285",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 2840,
+            "y": 208.25
+          },
+          "nodeIndex": "Parâmetro 2",
+          "nodeLineageTag": "e02af775-def6-4ec3-9c94-442a551235a1",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 3124,
+            "y": 208.25
+          },
+          "nodeIndex": "Parâmetro Data",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 3408,
+            "y": 208.25
+          },
+          "nodeIndex": "Parâmetro 3",
+          "nodeLineageTag": "89852290-a737-4f98-ac40-8ffc8146c2c9",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 3692,
+            "y": 208.25
+          },
+          "nodeIndex": "Parâmetro 4",
+          "nodeLineageTag": "567ebde7-af1d-4151-a553-653b83039c60",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 3976,
+            "y": 208.25
+          },
+          "nodeIndex": "Abs e extra",
+          "nodeLineageTag": "b8da67ce-3bd9-46bd-a271-e54c8fdb63f9",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 4260,
+            "y": 225
+          },
+          "nodeIndex": "data financ",
+          "nodeLineageTag": "438993e2-cd5b-4341-a421-e9821c1b5c89",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4544,
+            "y": 225
+          },
+          "nodeIndex": "Parâmetro % Abs e extras",
+          "nodeLineageTag": "a9732571-0486-4e6b-beb0-0f67752cf412",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4828,
+            "y": 225
+          },
+          "nodeIndex": "Parâmetro Data abs",
+          "nodeLineageTag": "b3c385d4-658f-4646-b0ee-df62aac61d37",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 5112,
+            "y": 225
+          },
+          "nodeIndex": "Parâm Pag Inicial",
+          "nodeLineageTag": "a8fb0c96-96cc-40c3-a0ed-b1a702387c7f",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}
