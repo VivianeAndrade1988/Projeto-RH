@@ -82,7 +82,7 @@ O objetivo foi transformar dados de RH em informações acionáveis para tomada 
 
 Quer ver uma análise mais completa, veja:
 
-[Apresentação Executiva](../Apresentação_Executiva/Dash_people_analytics.pdf)
+[Apresentação Executiva](../Apresentação_Executiva/Dash_people_analytics.pdf) Obs: Se não abrir, clique na pasta Análise_Executiva.
 
 
 
