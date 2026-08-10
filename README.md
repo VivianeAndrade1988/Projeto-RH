@@ -1,6 +1,6 @@
-# 📊 People Analytics | Rotatividade, Retenção e Produtividade
+#  People Analytics | Rotatividade, Retenção e Produtividade
 
-## 🏢 Contexto do Negócio
+##  Contexto do Negócio
 
 A empresa manteve um quadro de funcionários relativamente estável ao longo do ano, sustentando o nível atual da operação.  
 
@@ -10,7 +10,7 @@ A ausência de processos estruturados de retenção, integração e desenvolvime
 
 ---
 
-# 🎯 Desafio
+#  Desafio
 
 Identificar os principais fatores que impulsionam a rotatividade, compreender o perfil dos desligamentos e apoiar RH e liderança com dados para:
 
@@ -21,7 +21,7 @@ Identificar os principais fatores que impulsionam a rotatividade, compreender o 
 
 ---
 
-# 🔎 Abordagem Analítica
+#  Abordagem Analítica
 
 Desenvolvi um dashboard completo de **People Analytics**, consolidando indicadores estratégicos de:
 
@@ -35,7 +35,7 @@ O objetivo foi transformar dados de RH em informações acionáveis para tomada 
 
 ---
 
-# 📈 Principais Análises e Indicadores
+#  Principais Análises e Indicadores
 
 - Evolução de contratações, headcount e desligamentos ao longo dos meses
 - Distribuição de desligamentos por:
@@ -50,7 +50,7 @@ O objetivo foi transformar dados de RH em informações acionáveis para tomada 
 
 ---
 
-# 💡 Principais Insights
+#  Principais Insights
 
 - Turnover acima do ideal, concentrado principalmente em funções operacionais e comerciais
 - Saídas mais intensas entre profissionais experientes de 35 a 54 anos, gerando perda de produtividade e conhecimento interno
@@ -60,7 +60,7 @@ O objetivo foi transformar dados de RH em informações acionáveis para tomada 
 
 ---
 
-# 🚀 Recomendações Estratégicas
+#  Recomendações Estratégicas
 
 - Fortalecer recrutamento e seleção para reduzir má contratação
 - Estruturar onboarding e plano de desenvolvimento para cargos críticos
@@ -71,7 +71,7 @@ O objetivo foi transformar dados de RH em informações acionáveis para tomada 
 
 ---
 
-# 📌 Impacto para o Negócio
+#  Impacto para o Negócio
 
 ✔ Redução de custos com desligamentos e novas contratações  
 ✔ Retenção e desenvolvimento de talentos  
@@ -79,3 +79,8 @@ O objetivo foi transformar dados de RH em informações acionáveis para tomada 
 ✔ Aumento de produtividade e estabilidade das equipes  
 ✔ Gestão de pessoas orientada por dados  
 ✔ Maior eficiência operacional e previsibilidade do quadro de funcionários
+
+Quer ver uma análise mais completa, veja:
+
+[![Apresentação Executiva](../Apresentação_Executiva/Dash people analytics.pdf)
+
